@@ -1,5 +1,5 @@
 
-# Adapt Where Patients Differ: Learned Subspace Test-Time Adaptation for Medical Time Series
+# Learning Where to Adapt: Learned Subspace Test-Time Adaptation for Medical Time Series
 
 
 ## Introduction
