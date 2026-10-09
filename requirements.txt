@@ -1,0 +1,10 @@
+torch>=2.0
+numpy
+scipy
+pandas
+scikit-learn
+natsort
+matplotlib
+tqdm
+tensorboard
+psutil
