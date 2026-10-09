@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LSTA: Learning Where to Adapt</title>
+<meta name="description" content="Learning Where to Adapt: Learned Subspace Test-Time Adaptation for Medical Time Series (LSTA).">
+<meta name="theme-color" content="#1540B3">
+<meta property="og:title" content="Learning Where to Adapt: Learned Subspace Test-Time Adaptation for Medical Time Series">
+<meta property="og:image" content="assets/fig1_teaser.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f8fafc;--card:#ffffff;--ink:#1e293b;--muted:#475569;--line:#e2e8f0;--blue:#1540B3;--teal:#0E9EB7;--green:#37CCB6;--purple:#6B3FEB;--tint:#eef3ff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header.hero{padding:56px 0 28px;text-align:center}
+.logos{display:flex;justify-content:center;align-items:center;gap:36px;margin-bottom:28px;flex-wrap:wrap}
+.logos img{height:64px;width:auto}
+h1.title{font-size:clamp(28px,4.6vw,46px);line-height:1.15;font-weight:800;margin:0 0 14px;letter-spacing:-.01em}
+h1.title .grad{background:linear-gradient(90deg,var(--blue),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.venue{color:var(--muted);font-size:17px;margin:6px 0 18px;font-weight:500}
+.authors{font-size:17px;margin:0 0 6px}
+.authors span{margin:0 8px;white-space:nowrap}
+.affil{color:var(--muted);font-size:15px;margin:4px 0}
+.note{color:var(--muted);font-size:13px}
+.buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:24px 0 8px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:#1f2937;color:#fff;padding:10px 20px;border-radius:999px;font-weight:600;font-size:15px}
+.btn:hover{background:#111827;text-decoration:none}
+.btn.soon{background:#94a3b8;cursor:default}
+.btn svg{width:18px;height:18px;fill:currentColor}
+section{padding:44px 0;border-top:1px solid var(--line)}
+section.alt{background:#fff}
+h2{font-size:30px;font-weight:800;text-align:center;margin:0 0 6px}
+h2::after{content:"";display:block;width:84px;height:4px;border-radius:2px;margin:12px auto 26px;background:linear-gradient(90deg,var(--green),var(--purple))}
+h3{font-size:19px;margin:0 0 8px;color:var(--blue)}
+p.lead{color:var(--muted);text-align:center;max-width:820px;margin:0 auto 22px}
+.abstract{text-align:justify;color:var(--muted);font-size:17px;max-width:900px;margin:0 auto}
+.abstract b{color:var(--ink)}
+figure{margin:0 0 8px}
+figure img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#fff;display:block}
+figure.narrow img{max-width:640px;margin:0 auto}
+figcaption{font-size:14.5px;color:var(--muted);margin-top:10px;text-align:center}
+figcaption b{color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.card p{margin:0;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin:10px 0 34px}
+.stat{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 14px}
+.stat .num{font-size:38px;font-weight:800;color:var(--blue);line-height:1.1}
+.stat .lbl{color:var(--muted);font-size:14.5px;margin-top:6px}
+.tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:6px 0 18px}
+.tab{border:2px solid var(--blue);color:var(--blue);background:#fff;border-radius:999px;padding:8px 18px;font-weight:600;font-size:15px;cursor:pointer;font-family:inherit}
+.tab.active{background:var(--blue);color:#fff}
+.panel{display:none}
+.panel.active{display:block}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:#fff}
+table.res{border-collapse:collapse;width:100%;font-size:15px;min-width:640px}
+table.res th{color:var(--blue);text-align:center;padding:12px 10px;border-bottom:2px solid var(--blue);font-weight:700;white-space:nowrap}
+table.res th:first-child,table.res td.name{text-align:left;padding-left:16px}
+table.res td{padding:10px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums}
+table.res td.best{font-weight:700;color:var(--blue)}
+table.res td.second{text-decoration:underline;text-underline-offset:3px}
+table.res tr.ours td{background:var(--tint)}
+table.res tr.ours td.name{font-weight:700}
+table.res tr.sep td{border-top:2px solid var(--line)}
+table.res .sd{font-size:12px;color:#94a3b8;margin-left:2px}
+.tnote{font-size:14px;color:var(--muted);margin-top:10px;text-align:center}
+.grid2{display:grid;grid-template-columns:1fr;gap:28px}
+pre.bib{background:#0f172a;color:#e2e8f0;padding:20px;border-radius:14px;overflow-x:auto;font-family:"JetBrains Mono",monospace;font-size:13.5px;line-height:1.55;margin:0}
+.bibwrap{position:relative;max-width:860px;margin:0 auto}
+.copy{position:absolute;top:12px;right:12px;background:#334155;color:#fff;border:0;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer;font-family:inherit}
+footer{padding:36px 0 48px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer .logos img{height:44px}
+@media (max-width:600px){header.hero{padding-top:36px}.logos img{height:48px}.stat .num{font-size:30px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+<div class="wrap">
+  <div class="logos">
+    <img src="assets/logo_vitalverse.png" alt="Vitalverse">
+    <img src="assets/logo_mbzuai.png" alt="MBZUAI">
+  </div>
+  <h1 class="title"><span class="grad">Learning Where to Adapt</span><br>Learned Subspace Test-Time Adaptation for Medical Time Series</h1>
+  <div class="venue">Preprint, 2026</div>
+  <div class="authors">
+    <span><a href="https://github.com/adinathdukre">Adinath Dukre</a><sup>1,2*</sup></span>
+    <span>Sandun Herath<sup>2*</sup></span>
+    <span>Imran Razzak<sup>1,2</sup></span>
+  </div>
+  <div class="affil"><sup>1</sup>Mohamed bin Zayed University of Artificial Intelligence, Abu Dhabi, UAE &nbsp;&bull;&nbsp; <sup>2</sup>Vitalverse</div>
+  <div class="note"><sup>*</sup>Equal contribution</div>
+  <div class="buttons">
+    <span class="btn soon" title="arXiv link coming soon"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6zM14 3v5h5"/></svg>Paper (arXiv soon)</span>
+    <a class="btn" href="https://github.com/adinathdukre/LSTA"><svg viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
+    <a class="btn" href="https://huggingface.co/adidukrembzuai/LSTA">🤗 Model</a>
+  </div>
+</div>
+</header>
+
+<section class="alt">
+<div class="wrap">
+  <figure>
+    <img src="assets/fig1_teaser.png" alt="Overview of LSTA">
+    <figcaption><b>Figure 1. Overview of LSTA.</b> (a) Premise: recordings from different subjects differ through a few shared factors such as gain, baseline and electrical axis (schematic; traces are illustrative, not measured data). (b) Entropy-based test-time adaptation moves every LayerNorm parameter along the model's uncertainty, whereas LSTA restricts the update of a new subject to a low-rank subspace meta-learned from past subjects. (c) Measured worst-case change in macro-F1 relative to the frozen backbone across the eight datasets; LSTA is the only method that never falls below the frozen model.</figcaption>
+  </figure>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2>Abstract</h2>
+  <p class="abstract">Test-time adaptation (TTA) promises to personalize medical time series classifiers to a new subject from a few unlabeled recordings. Its standard recipe, entropy minimization over normalization parameters, follows the model's uncertainty rather than the ways in which subjects actually differ, and with few windows it can turn correct predictions into errors. We argue that <b>where to adapt should itself be learned</b>. Because inter-subject shift is plausibly driven by a few shared physiological and recording factors, we propose <b>Learned Subspace Test-Time Adaptation (LSTA)</b>, which meta-learns from past subjects a low-rank space of LayerNorm updates and restricts each new subject's adaptation to it. During meta-training, unlabeled support windows determine an entropy step within this space, and the classification loss on labeled query windows from the same subject shapes it. At test time the space is fixed, the parameters outside LayerNorm remain frozen, and each subject adapts from at most eight unlabeled windows. On five EEG and ECG benchmarks with subject-exclusive splits, LSTA obtains the highest mean accuracy and macro-F1 among seven TTA baselines, and a learned subspace outperforms a random one in <b>22 of 25 dataset-seed pairs</b>. Across all eight datasets we evaluate, LSTA is the only method whose macro-F1 <b>never falls below that of the frozen model</b>, and under contaminated support it degrades far less than direct LayerNorm adaptation and turns fewer correct predictions into errors. On clean data, its gain over direct LayerNorm adaptation is concentrated on one dataset.</p>
+</div>
+</section>
+
+<section class="alt" id="method">
+<div class="wrap">
+  <h2>Method</h2>
+  <p class="lead">LSTA learns, from past subjects, the directions in which a new subject's LayerNorm parameters are allowed to move, and adapts only along them.</p>
+  <figure>
+    <img src="assets/fig2_method.png" alt="LSTA framework">
+    <figcaption><b>Figure 2.</b> (a) Learning the adaptation subspace: unlabeled support windows determine an entropy-based LayerNorm update within a shared low-dimensional space. Classification loss on separate labeled query windows trains the adaptation basis, while the pretrained source parameters remain fixed. (b) Subject-specific test-time adaptation: the learned basis is frozen, and unlabeled support windows from an unseen subject determine the LayerNorm update used to classify that subject's query windows.</figcaption>
+  </figure>
+  <div class="cards">
+    <div class="card"><h3>Learned subspace</h3><p>Inter-subject shift is plausibly driven by a few shared physiological and recording factors, so subject-specific LayerNorm updates are restricted to a shared low-rank subspace.</p></div>
+    <div class="card"><h3>Meta-training</h3><p>Unlabeled support windows of a training subject determine an entropy step within the subspace; the classification loss on labeled query windows from the same subject shapes it.</p></div>
+    <div class="card"><h3>Test time</h3><p>The subspace is fixed, all parameters outside LayerNorm stay frozen, and each new subject adapts from at most eight unlabeled windows.</p></div>
+  </div>
+</div>
+</section>
+
+<section id="results">
+<div class="wrap">
+  <h2>Results</h2>
+  <p class="lead">Macro-F1 on five subject-labeled EEG and ECG benchmarks (mean over five backbone seeds). All numbers are from the paper.</p>
+  <div class="stats">
+    <div class="stat"><div class="num">79.23</div><div class="lbl">mean macro-F1 of LSTA<br>(frozen backbone: 74.10)</div></div>
+    <div class="stat"><div class="num">22 / 25</div><div class="lbl">dataset-seed pairs where the learned subspace beats a random one</div></div>
+    <div class="stat"><div class="num">8 / 8</div><div class="lbl">datasets where LSTA never falls below the frozen model</div></div>
+    <div class="stat"><div class="num">&le; 8</div><div class="lbl">unlabeled windows per new subject</div></div>
+  </div>
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-panel="p1">Comparison with TTA methods</button>
+    <button class="tab" data-panel="p2">Component ablation</button>
+  </div>
+  <div class="panel active" id="p1">
+    <div class="table-wrap"><table class="res"><thead><tr><th>Method</th><th>ADFTD</th><th>APAVA</th><th>TDBrain</th><th>PTB</th><th>PTB-XL</th><th>Mean</th></tr></thead><tbody><tr><td class="name">Frozen backbone</td><td class="">48.44<span class="sd">±1.72</span></td><td class="">85.71<span class="sd">±0.49</span></td><td class="">92.36<span class="sd">±1.27</span></td><td class="">81.60<span class="sd">±2.31</span></td><td class="">62.39<span class="sd">±0.30</span></td><td class="">74.10</td></tr><tr><td class="name">Tent</td><td class=" second">52.70<span class="sd">±3.00</span></td><td class="">88.17<span class="sd">±2.00</span></td><td class="">95.14<span class="sd">±2.05</span></td><td class="">81.54<span class="sd">±2.63</span></td><td class="">64.10<span class="sd">±0.45</span></td><td class=" second">76.33</td></tr><tr><td class="name">T3A</td><td class="">49.95<span class="sd">±2.60</span></td><td class="">87.64<span class="sd">±1.28</span></td><td class="">92.66<span class="sd">±1.32</span></td><td class="">81.70<span class="sd">±2.94</span></td><td class="">64.44<span class="sd">±0.42</span></td><td class="">75.28</td></tr><tr><td class="name">SAR</td><td class="">50.54<span class="sd">±3.47</span></td><td class="">87.25<span class="sd">±2.52</span></td><td class=" second">97.18<span class="sd">±0.56</span></td><td class="">81.68<span class="sd">±2.71</span></td><td class="">63.81<span class="sd">±0.38</span></td><td class="">76.09</td></tr><tr><td class="name">MemBN</td><td class="">45.93<span class="sd">±1.84</span></td><td class="">81.05<span class="sd">±0.72</span></td><td class="">89.42<span class="sd">±1.17</span></td><td class="">72.99<span class="sd">±3.66</span></td><td class="">57.95<span class="sd">±0.49</span></td><td class="">69.47</td></tr><tr><td class="name">SHOT</td><td class="">50.73<span class="sd">±3.21</span></td><td class="">88.64<span class="sd">±1.94</span></td><td class="">94.22<span class="sd">±1.69</span></td><td class="">80.99<span class="sd">±2.78</span></td><td class="">63.97<span class="sd">±0.46</span></td><td class="">75.71</td></tr><tr><td class="name">UCon</td><td class="">51.70<span class="sd">±3.36</span></td><td class=" second">89.05<span class="sd">±3.64</span></td><td class="">92.92<span class="sd">±3.35</span></td><td class=" second">82.02<span class="sd">±1.72</span></td><td class=" second">64.62<span class="sd">±0.44</span></td><td class="">76.06</td></tr><tr><td class="name">MedTS-TTT</td><td class="">48.80<span class="sd">±2.79</span></td><td class="">73.15<span class="sd">±9.25</span></td><td class="">96.88<span class="sd">±2.86</span></td><td class="">73.89<span class="sd">±4.49</span></td><td class="">63.33<span class="sd">±1.00</span></td><td class="">71.21</td></tr><tr class="ours"><td class="name">LSTA (ours)</td><td class="best">55.32<span class="sd">±1.86</span></td><td class="best">93.18<span class="sd">±3.60</span></td><td class="best">98.88<span class="sd">±0.76</span></td><td class="best">84.09<span class="sd">±3.53</span></td><td class="best">64.66<span class="sd">±0.51</span></td><td class="best">79.23</td></tr></tbody></table></div>
+    <div class="tnote">Macro-F1 (%, mean ± s.d. over five backbone seeds). All methods adapt the same frozen TeCh checkpoints with the same support draws and query windows, except MedTS-TTT, which uses its own backbone. Best in bold, second-best underlined.</div>
+  </div>
+  <div class="panel" id="p2">
+    <div class="table-wrap"><table class="res"><thead><tr><th>Variant</th><th>APAVA</th><th>TDBrain</th><th>PTB</th><th>ADFTD</th><th>PTB-XL</th><th>Mean</th></tr></thead><tbody><tr><td class="name">Frozen Backbone</td><td class="">85.71<span class="sd">±0.49</span></td><td class="">92.36<span class="sd">±1.27</span></td><td class="">81.60<span class="sd">±2.31</span></td><td class="">48.44<span class="sd">±1.72</span></td><td class="">62.39<span class="sd">±0.30</span></td><td class="">74.10</td></tr><tr><td class="name">LN-TTA</td><td class="">92.36<span class="sd">±3.68</span></td><td class="">98.91<span class="sd">±0.79</span></td><td class="">83.56<span class="sd">±3.27</span></td><td class="">51.42<span class="sd">±3.71</span></td><td class="best">64.71<span class="sd">±0.45</span></td><td class="">78.19</td></tr><tr class="ours"><td class="name">LSTA</td><td class="best">93.18<span class="sd">±3.60</span></td><td class="">98.88<span class="sd">±0.76</span></td><td class="best">84.09<span class="sd">±3.53</span></td><td class="best">55.32<span class="sd">±1.86</span></td><td class="">64.66<span class="sd">±0.51</span></td><td class="best">79.23</td></tr><tr class="sep"><td class="name">Random-Subspace</td><td class="">91.07<span class="sd">±5.96</span></td><td class="">98.65<span class="sd">±0.98</span></td><td class="">81.47<span class="sd">±4.31</span></td><td class="">51.08<span class="sd">±3.46</span></td><td class="">64.06<span class="sd">±0.44</span></td><td class="">77.26</td></tr><tr><td class="name">LN-TTA-Learnable</td><td class="">92.41<span class="sd">±3.75</span></td><td class="best">98.93<span class="sd">±0.79</span></td><td class="">83.60<span class="sd">±3.25</span></td><td class="">52.51<span class="sd">±3.39</span></td><td class="best">64.71<span class="sd">±0.46</span></td><td class="">78.43</td></tr></tbody></table></div>
+    <div class="tnote">Test F1 (×100, mean ± s.d. over 5 seeds). Top: components added in turn. Bottom: LSTA's meta-learned rank-8 subspace replaced. Bold: best variant per column.</div>
+  </div>
+</div>
+</section>
+
+<section class="alt">
+<div class="wrap">
+  <h2>Robustness and Efficiency</h2>
+  <div class="grid2">
+    <figure>
+      <img src="assets/fig4_contaminated_support.png" alt="Robustness to support contamination">
+      <figcaption><b>Figure 3.</b> Robustness to support contamination across six subject-labeled datasets. 0%, 25% or 50% of the support windows are replaced with windows from another subject of a different diagnostic class. Curves show mean macro-F1 across five backbone seeds and five support draws per seed. Among the plotted variants, LSTA achieves the highest macro-F1 at 50% contamination on all six datasets.</figcaption>
+    </figure>
+    <figure class="narrow">
+      <img src="assets/fig3_efficiency.png" alt="Performance and efficiency on TDBRAIN">
+      <figcaption><b>Figure 4.</b> Performance and efficiency on TDBRAIN. Test macro-F1 against inference time per test episode (log scale); bubble size indicates FLOPs, and the upper-left corner is better.</figcaption>
+    </figure>
+  </div>
+</div>
+</section>
+
+<section id="bibtex">
+<div class="wrap">
+  <h2>BibTeX</h2>
+  <div class="bibwrap">
+<button class="copy" onclick="navigator.clipboard.writeText(document.getElementById('bib').innerText).then(()=>{this.textContent='Copied';setTimeout(()=>this.textContent='Copy',1500)})">Copy</button>
+<pre class="bib" id="bib">@article{dukre2026lsta,
+  title={Learning Where to Adapt: Learned Subspace Test-Time Adaptation for Medical Time Series},
+  author={Dukre, Adinath and Herath, Sandun and Razzak, Imran},
+  journal={arXiv preprint},
+  year={2026}
+}</pre>
+  </div>
+</div>
+</section>
+
+<footer>
+<div class="wrap">
+  <div class="logos">
+    <img src="https://raw.githubusercontent.com/genmilab/VGS-Decoding/main/docs/assets/genmilab-logo.png" alt="GenMI Lab">
+    <img src="assets/logo_mbzuai.png" alt="MBZUAI">
+    <img src="assets/logo_vitalverse.png" alt="Vitalverse">
+  </div>
+  <p>Page layout inspired by the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">Academic Project Page Template</a>.<br>Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+</div>
+</footer>
+
+<script>
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById(t.dataset.panel).classList.add('active');}));
+</script>
+</body>
+</html>
