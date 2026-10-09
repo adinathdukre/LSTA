@@ -34,6 +34,11 @@ Official code for **LSTA (Learned Subspace Test-Time Adaptation)**.
 
 Test-time adaptation (TTA) promises to personalize medical time series classifiers to a new subject from a few unlabeled recordings. Its standard recipe, entropy minimization over normalization parameters, follows the model's uncertainty rather than the ways in which subjects actually differ, and with few windows it can turn correct predictions into errors. LSTA instead **learns where to adapt**: it meta-learns from past subjects a low-rank space of LayerNorm updates and restricts each new subject's adaptation to it.
 
+<p align="center">
+<img src="./docs/assets/fig1_teaser.png" alt="LSTA overview" width="100%"/>
+<em><b>Fig. 1.</b> Overview of LSTA. (a) Premise: recordings from different subjects differ through a few shared factors such as gain, baseline and electrical axis (schematic; traces are illustrative, not measured data). (b) Entropy-based test-time adaptation moves every LayerNorm parameter along the model's uncertainty, whereas LSTA restricts the update of a new subject to a low-rank subspace meta-learned from past subjects. (c) Measured worst-case change in macro-F1 relative to the frozen backbone across the eight datasets; LSTA is the only method that never falls below the frozen model.</em>
+</p>
+
 ## 📖 Contents
 - [🧠 Method](#-method)
 - [🏆 Results](#-results)
@@ -47,6 +52,11 @@ Test-time adaptation (TTA) promises to personalize medical time series classifie
 
 ## 🧠 Method
 
+<p align="center">
+<img src="./docs/assets/fig2_method.png" alt="LSTA framework" width="100%"/>
+<em><b>Fig. 2.</b> (a) Learning the adaptation subspace: unlabeled support windows determine an entropy-based LayerNorm update within a shared low-dimensional space. Classification loss on separate labeled query windows trains the adaptation basis, while the pretrained source parameters remain fixed. (b) Subject-specific test-time adaptation: the learned basis is frozen, and unlabeled support windows from an unseen subject determine the LayerNorm update used to classify that subject's query windows.</em>
+</p>
+
 - **Learned adaptation subspace.** Inter-subject shift is plausibly driven by a few shared physiological and recording factors, so LSTA restricts subject-specific LayerNorm updates to a shared low-rank subspace learned from training subjects.
 - **Meta-training.** For each training subject, unlabeled support windows determine an entropy step within the subspace, and the classification loss on labeled query windows from the same subject shapes the subspace.
 - **Test time.** The subspace is fixed, all parameters outside LayerNorm stay frozen, and each new subject adapts from at most eight unlabeled windows.
@@ -59,6 +69,17 @@ As reported in the paper:
 - A learned subspace outperforms a random one in 22 of 25 dataset-seed pairs.
 - Across all eight datasets evaluated, LSTA is the only method whose macro-F1 never falls below that of the frozen model.
 - Under contaminated support, LSTA degrades far less than direct LayerNorm adaptation and turns fewer correct predictions into errors. On clean data, its gain over direct LayerNorm adaptation is concentrated on one dataset.
+
+<p align="center">
+<img src="./docs/assets/fig3_efficiency.png" alt="Performance and efficiency on TDBRAIN" width="60%"/>
+<br/>
+<em><b>Fig. 3.</b> Performance and efficiency on TDBRAIN. Test macro-F1 against inference time per test episode (log scale); bubble size indicates FLOPs, and the upper-left corner is better.</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/fig4_contaminated_support.png" alt="Robustness to support contamination" width="100%"/>
+<em><b>Fig. 4.</b> Robustness to support contamination across six subject-labeled datasets. 0%, 25% or 50% of the support windows are replaced with windows from another subject of a different diagnostic class. Curves show mean macro-F1 across five backbone seeds and five support draws per seed.</em>
+</p>
 
 ## 📊 Datasets
 
