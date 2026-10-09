@@ -76,6 +76,12 @@ pre.bib{background:#0f172a;color:#e2e8f0;padding:20px;border-radius:14px;overflo
 .copy{position:absolute;top:12px;right:12px;background:#334155;color:#fff;border:0;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer;font-family:inherit}
 footer{padding:36px 0 48px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
 footer .logos img{height:44px}
+.appgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:start}
+figure.app{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;margin:0}
+figure.app img{border:0;border-radius:6px}
+figure.app.wide{grid-column:1 / -1}
+figure.app.wide img{max-width:820px;margin:0 auto}
+@media (max-width:760px){.appgrid{grid-template-columns:1fr}}
 @media (max-width:600px){header.hero{padding-top:36px}.logos img{height:48px}.stat .num{font-size:30px}}
 </style>
 </head>
@@ -147,14 +153,14 @@ footer .logos img{height:44px}
     <div class="stat"><div class="num">&le; 8</div><div class="lbl">unlabeled windows per new subject</div></div>
   </div>
   <div class="tabs" role="tablist">
-    <button class="tab active" data-panel="p1">Comparison with TTA methods</button>
-    <button class="tab" data-panel="p2">Component ablation</button>
+    <button class="tab active" data-panel="p1" data-group="res">Comparison with TTA methods</button>
+    <button class="tab" data-panel="p2" data-group="res">Component ablation</button>
   </div>
-  <div class="panel active" id="p1">
+  <div class="panel active" id="p1" data-group="res">
     <div class="table-wrap"><table class="res"><thead><tr><th>Method</th><th>ADFTD</th><th>APAVA</th><th>TDBrain</th><th>PTB</th><th>PTB-XL</th><th>Mean</th></tr></thead><tbody><tr><td class="name">Frozen backbone</td><td class="">48.44<span class="sd">±1.72</span></td><td class="">85.71<span class="sd">±0.49</span></td><td class="">92.36<span class="sd">±1.27</span></td><td class="">81.60<span class="sd">±2.31</span></td><td class="">62.39<span class="sd">±0.30</span></td><td class="">74.10</td></tr><tr><td class="name">Tent</td><td class=" second">52.70<span class="sd">±3.00</span></td><td class="">88.17<span class="sd">±2.00</span></td><td class="">95.14<span class="sd">±2.05</span></td><td class="">81.54<span class="sd">±2.63</span></td><td class="">64.10<span class="sd">±0.45</span></td><td class=" second">76.33</td></tr><tr><td class="name">T3A</td><td class="">49.95<span class="sd">±2.60</span></td><td class="">87.64<span class="sd">±1.28</span></td><td class="">92.66<span class="sd">±1.32</span></td><td class="">81.70<span class="sd">±2.94</span></td><td class="">64.44<span class="sd">±0.42</span></td><td class="">75.28</td></tr><tr><td class="name">SAR</td><td class="">50.54<span class="sd">±3.47</span></td><td class="">87.25<span class="sd">±2.52</span></td><td class=" second">97.18<span class="sd">±0.56</span></td><td class="">81.68<span class="sd">±2.71</span></td><td class="">63.81<span class="sd">±0.38</span></td><td class="">76.09</td></tr><tr><td class="name">MemBN</td><td class="">45.93<span class="sd">±1.84</span></td><td class="">81.05<span class="sd">±0.72</span></td><td class="">89.42<span class="sd">±1.17</span></td><td class="">72.99<span class="sd">±3.66</span></td><td class="">57.95<span class="sd">±0.49</span></td><td class="">69.47</td></tr><tr><td class="name">SHOT</td><td class="">50.73<span class="sd">±3.21</span></td><td class="">88.64<span class="sd">±1.94</span></td><td class="">94.22<span class="sd">±1.69</span></td><td class="">80.99<span class="sd">±2.78</span></td><td class="">63.97<span class="sd">±0.46</span></td><td class="">75.71</td></tr><tr><td class="name">UCon</td><td class="">51.70<span class="sd">±3.36</span></td><td class=" second">89.05<span class="sd">±3.64</span></td><td class="">92.92<span class="sd">±3.35</span></td><td class=" second">82.02<span class="sd">±1.72</span></td><td class=" second">64.62<span class="sd">±0.44</span></td><td class="">76.06</td></tr><tr><td class="name">MedTS-TTT</td><td class="">48.80<span class="sd">±2.79</span></td><td class="">73.15<span class="sd">±9.25</span></td><td class="">96.88<span class="sd">±2.86</span></td><td class="">73.89<span class="sd">±4.49</span></td><td class="">63.33<span class="sd">±1.00</span></td><td class="">71.21</td></tr><tr class="ours"><td class="name">LSTA (ours)</td><td class="best">55.32<span class="sd">±1.86</span></td><td class="best">93.18<span class="sd">±3.60</span></td><td class="best">98.88<span class="sd">±0.76</span></td><td class="best">84.09<span class="sd">±3.53</span></td><td class="best">64.66<span class="sd">±0.51</span></td><td class="best">79.23</td></tr></tbody></table></div>
     <div class="tnote">Macro-F1 (%, mean ± s.d. over five backbone seeds). All methods adapt the same frozen TeCh checkpoints with the same support draws and query windows, except MedTS-TTT, which uses its own backbone. Best in bold, second-best underlined.</div>
   </div>
-  <div class="panel" id="p2">
+  <div class="panel" id="p2" data-group="res">
     <div class="table-wrap"><table class="res"><thead><tr><th>Variant</th><th>APAVA</th><th>TDBrain</th><th>PTB</th><th>ADFTD</th><th>PTB-XL</th><th>Mean</th></tr></thead><tbody><tr><td class="name">Frozen Backbone</td><td class="">85.71<span class="sd">±0.49</span></td><td class="">92.36<span class="sd">±1.27</span></td><td class="">81.60<span class="sd">±2.31</span></td><td class="">48.44<span class="sd">±1.72</span></td><td class="">62.39<span class="sd">±0.30</span></td><td class="">74.10</td></tr><tr><td class="name">LN-TTA</td><td class="">92.36<span class="sd">±3.68</span></td><td class="">98.91<span class="sd">±0.79</span></td><td class="">83.56<span class="sd">±3.27</span></td><td class="">51.42<span class="sd">±3.71</span></td><td class="best">64.71<span class="sd">±0.45</span></td><td class="">78.19</td></tr><tr class="ours"><td class="name">LSTA</td><td class="best">93.18<span class="sd">±3.60</span></td><td class="">98.88<span class="sd">±0.76</span></td><td class="best">84.09<span class="sd">±3.53</span></td><td class="best">55.32<span class="sd">±1.86</span></td><td class="">64.66<span class="sd">±0.51</span></td><td class="best">79.23</td></tr><tr class="sep"><td class="name">Random-Subspace</td><td class="">91.07<span class="sd">±5.96</span></td><td class="">98.65<span class="sd">±0.98</span></td><td class="">81.47<span class="sd">±4.31</span></td><td class="">51.08<span class="sd">±3.46</span></td><td class="">64.06<span class="sd">±0.44</span></td><td class="">77.26</td></tr><tr><td class="name">LN-TTA-Learnable</td><td class="">92.41<span class="sd">±3.75</span></td><td class="best">98.93<span class="sd">±0.79</span></td><td class="">83.60<span class="sd">±3.25</span></td><td class="">52.51<span class="sd">±3.39</span></td><td class="best">64.71<span class="sd">±0.46</span></td><td class="">78.43</td></tr></tbody></table></div>
     <div class="tnote">Test F1 (×100, mean ± s.d. over 5 seeds). Top: components added in turn. Bottom: LSTA's meta-learned rank-8 subspace replaced. Bold: best variant per column.</div>
   </div>
@@ -173,6 +179,40 @@ footer .logos img{height:44px}
       <img src="assets/fig3_efficiency.png" alt="Performance and efficiency on TDBRAIN">
       <figcaption><b>Figure 4.</b> Performance and efficiency on TDBRAIN. Test macro-F1 against inference time per test episode (log scale); bubble size indicates FLOPs, and the upper-left corner is better.</figcaption>
     </figure>
+  </div>
+</div>
+</section>
+
+<section class="alt" id="appendix">
+<div class="wrap">
+  <h2>Appendix: Additional Analyses</h2>
+  <p class="lead">Figures and tables from the paper's appendix. Click any image to open it at full resolution.</p>
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-panel="a1" data-group="app">Figures</button>
+    <button class="tab" data-panel="a2" data-group="app">Tables</button>
+  </div>
+  <div class="panel active" id="a1" data-group="app">
+  <div class="appgrid">
+    <figure class="app"><a href="assets/appendix/app_fig05.png" target="_blank"><img src="assets/appendix/app_fig05.png" alt="Figure 5. t-SNE of pre-classifier features on APAVA" loading="lazy"></a><figcaption><b>Figure 5.</b> t-SNE of pre-classifier features on APAVA</figcaption></figure>
+    <figure class="app"><a href="assets/appendix/app_fig06.png" target="_blank"><img src="assets/appendix/app_fig06.png" alt="Figure 6. Effect of the adaptation subspace rank" loading="lazy"></a><figcaption><b>Figure 6.</b> Effect of the adaptation subspace rank</figcaption></figure>
+    <figure class="app"><a href="assets/appendix/app_fig07.png" target="_blank"><img src="assets/appendix/app_fig07.png" alt="Figure 7. Effect of the number of unlabeled support windows" loading="lazy"></a><figcaption><b>Figure 7.</b> Effect of the number of unlabeled support windows</figcaption></figure>
+    <figure class="app"><a href="assets/appendix/app_fig08.png" target="_blank"><img src="assets/appendix/app_fig08.png" alt="Figure 8. Effect of the number of test-time adaptation steps" loading="lazy"></a><figcaption><b>Figure 8.</b> Effect of the number of test-time adaptation steps</figcaption></figure>
+    <figure class="app"><a href="assets/appendix/app_fig09.png" target="_blank"><img src="assets/appendix/app_fig09.png" alt="Figure 9. Sensitivity to the adaptation step size" loading="lazy"></a><figcaption><b>Figure 9.</b> Sensitivity to the adaptation step size</figcaption></figure>
+    <figure class="app"><a href="assets/appendix/app_fig10.png" target="_blank"><img src="assets/appendix/app_fig10.png" alt="Figure 10. Robustness to test-time signal corruption" loading="lazy"></a><figcaption><b>Figure 10.</b> Robustness to test-time signal corruption</figcaption></figure>
+    <figure class="app wide"><a href="assets/appendix/app_fig11.png" target="_blank"><img src="assets/appendix/app_fig11.png" alt="Figure 11. Distributions of LayerNorm updates" loading="lazy"></a><figcaption><b>Figure 11.</b> Distributions of LayerNorm updates</figcaption></figure>
+    <figure class="app wide"><a href="assets/appendix/app_fig12.png" target="_blank"><img src="assets/appendix/app_fig12.png" alt="Figure 12. t-SNE of representations for the frozen backbone and adaptation methods" loading="lazy"></a><figcaption><b>Figure 12.</b> t-SNE of representations for the frozen backbone and adaptation methods</figcaption></figure>
+    <figure class="app"><a href="assets/appendix/app_fig13.png" target="_blank"><img src="assets/appendix/app_fig13.png" alt="Figure 13. t-SNE of ADFTD pre-classifier features" loading="lazy"></a><figcaption><b>Figure 13.</b> t-SNE of ADFTD pre-classifier features</figcaption></figure>
+  </div>
+  </div>
+  <div class="panel" id="a2" data-group="app">
+  <div class="appgrid">
+    <figure class="app wide"><a href="assets/appendix/app_table03.png" target="_blank"><img src="assets/appendix/app_table03.png" alt="Table 3. Comparison with published classifiers on the five subject-labeled datasets" loading="lazy"></a><figcaption><b>Table 3.</b> Comparison with published classifiers on the five subject-labeled datasets</figcaption></figure>
+    <figure class="app wide"><a href="assets/appendix/app_table04.png" target="_blank"><img src="assets/appendix/app_table04.png" alt="Table 4. Dataset summary" loading="lazy"></a><figcaption><b>Table 4.</b> Dataset summary</figcaption></figure>
+    <figure class="app wide"><a href="assets/appendix/app_table05.png" target="_blank"><img src="assets/appendix/app_table05.png" alt="Table 5. Window-labeled datasets (MIT-BIH, Sleep-EDF) and HPP" loading="lazy"></a><figcaption><b>Table 5.</b> Window-labeled datasets (MIT-BIH, Sleep-EDF) and HPP</figcaption></figure>
+    <figure class="app wide"><a href="assets/appendix/app_table06.png" target="_blank"><img src="assets/appendix/app_table06.png" alt="Table 6. F1 on HPP under support contamination" loading="lazy"></a><figcaption><b>Table 6.</b> F1 on HPP under support contamination</figcaption></figure>
+    <figure class="app wide"><a href="assets/appendix/app_table07.png" target="_blank"><img src="assets/appendix/app_table07.png" alt="Table 7. Component ablation on HPP, MIT-BIH and Sleep-EDF" loading="lazy"></a><figcaption><b>Table 7.</b> Component ablation on HPP, MIT-BIH and Sleep-EDF</figcaption></figure>
+    <figure class="app wide"><a href="assets/appendix/app_table08.png" target="_blank"><img src="assets/appendix/app_table08.png" alt="Table 8. Full comparison with TTA and source-free baselines" loading="lazy"></a><figcaption><b>Table 8.</b> Full comparison with TTA and source-free baselines</figcaption></figure>
+  </div>
   </div>
 </div>
 </section>
@@ -204,7 +244,7 @@ footer .logos img{height:44px}
 </footer>
 
 <script>
-document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById(t.dataset.panel).classList.add('active');}));
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{const g=t.dataset.group;document.querySelectorAll('.tab[data-group="'+g+'"]').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel[data-group="'+g+'"]').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById(t.dataset.panel).classList.add('active');}));
 </script>
 </body>
 </html>
