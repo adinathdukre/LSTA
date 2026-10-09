@@ -18,7 +18,9 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,
 a{color:var(--blue);text-decoration:none}
 a:hover{text-decoration:underline}
 .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-header.hero{padding:56px 0 28px;text-align:center}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:18px 32px 0}
+.topbar img{height:76px;width:auto;display:block}
+header.hero{padding:18px 0 28px;text-align:center}
 .logos{display:flex;justify-content:center;align-items:center;gap:36px;margin-bottom:28px;flex-wrap:wrap}
 .logos img{height:64px;width:auto}
 h1.title{font-size:clamp(28px,4.6vw,46px);line-height:1.15;font-weight:800;margin:0 0 14px;letter-spacing:-.01em}
@@ -82,17 +84,17 @@ figure.app img{border:0;border-radius:6px}
 figure.app.wide{grid-column:1 / -1}
 figure.app.wide img{max-width:820px;margin:0 auto}
 @media (max-width:760px){.appgrid{grid-template-columns:1fr}}
-@media (max-width:600px){header.hero{padding-top:36px}.logos img{height:48px}.stat .num{font-size:30px}}
+@media (max-width:600px){.topbar{padding:12px 16px 0}.topbar img{height:46px}header.hero{padding-top:12px}.logos img{height:48px}.stat .num{font-size:30px}}
 </style>
 </head>
 <body>
 
+<div class="topbar">
+  <span class="tl"><img src="assets/logo_vitalverse.png" alt="Vitalverse"></span>
+  <a href="https://mbzuai.ac.ae" class="tr"><img src="assets/logo_mbzuai.png" alt="MBZUAI"></a>
+</div>
 <header class="hero">
 <div class="wrap">
-  <div class="logos">
-    <img src="assets/logo_vitalverse.png" alt="Vitalverse">
-    <img src="assets/logo_mbzuai.png" alt="MBZUAI">
-  </div>
   <h1 class="title"><span class="grad">Learning Where to Adapt</span><br>Learned Subspace Test-Time Adaptation for Medical Time Series</h1>
   <div class="venue">Preprint, 2026</div>
   <div class="authors">
