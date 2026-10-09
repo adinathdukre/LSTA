@@ -11,12 +11,13 @@ style="margin-bottom:-10px; display:block;" />
 </a>
 
 [![Paper](https://img.shields.io/badge/Paper-arXiv_(coming_soon)-B31B1B?style=for-the-badge&logo=arxiv&logoColor=white)](#-citation)
+[![Project Page](https://img.shields.io/badge/Project-Page-1540B3?style=for-the-badge&logo=googlechrome&logoColor=white)](https://adinathdukre.github.io/LSTA/)
 [![Weights](https://img.shields.io/badge/HF-Checkpoints-AECBFA?style=for-the-badge&logo=huggingface&logoColor=FFC107)](https://huggingface.co/adidukrembzuai/LSTA)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.x-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](#-installation)
 [![Task](https://img.shields.io/badge/Task-Test--Time_Adaptation-37CCB6?style=for-the-badge)](#-overview)
 [![Visitors](https://api.visitorbadge.io/api/combined?path=https%3A%2F%2Fgithub.com%2Fadinathdukre%2FLSTA&label=Views&countColor=%231540b3&style=for-the-badge)](https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2Fadinathdukre%2FLSTA)
 
-<h3>📄 <a href="#-citation">Paper</a> &nbsp;|&nbsp; 🤗 <a href="https://huggingface.co/adidukrembzuai/LSTA">Checkpoints</a> &nbsp;|&nbsp; 🧠 <a href="#-method">Method</a> &nbsp;|&nbsp; ⚡ <a href="#-running-experiments">Run</a></h3>
+<h3>📄 <a href="#-citation">Paper</a> &nbsp;|&nbsp; 🌐 <a href="https://adinathdukre.github.io/LSTA/">Project Page</a> &nbsp;|&nbsp; 🤗 <a href="https://huggingface.co/adidukrembzuai/LSTA">Checkpoints</a> &nbsp;|&nbsp; 🧠 <a href="#-method">Method</a> &nbsp;|&nbsp; ⚡ <a href="#-running-experiments">Run</a></h3>
 
 <b><a href="https://github.com/adinathdukre">Adinath Dukre</a><sup>1,2&#42;</sup>, Sandun Herath<sup>2&#42;</sup>, Imran Razzak<sup>1,2</sup></b>
 
@@ -69,6 +70,16 @@ As reported in the paper:
 - A learned subspace outperforms a random one in 22 of 25 dataset-seed pairs.
 - Across all eight datasets evaluated, LSTA is the only method whose macro-F1 never falls below that of the frozen model.
 - Under contaminated support, LSTA degrades far less than direct LayerNorm adaptation and turns fewer correct predictions into errors. On clean data, its gain over direct LayerNorm adaptation is concentrated on one dataset.
+
+<p align="center">
+<img src="./docs/assets/tab1_main_results.png" alt="Main results" width="100%"/>
+<em><b>Table 1.</b> Macro-F1 (%, mean ± s.d. over five backbone seeds) of test-time adaptation methods on the five subject-labeled datasets. All methods adapt the same frozen TeCh checkpoints with the same support draws and query windows, except MedTS-TTT, which uses its own backbone.</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/tab2_component_ablation.png" alt="Component ablation" width="100%"/>
+<em><b>Table 2.</b> Component ablation (test F1, ×100, mean ± s.d. over 5 seeds). Top: components added in turn. Bottom: LSTA's meta-learned rank-8 subspace replaced.</em>
+</p>
 
 <p align="center">
 <img src="./docs/assets/fig3_efficiency.png" alt="Performance and efficiency on TDBRAIN" width="60%"/>
