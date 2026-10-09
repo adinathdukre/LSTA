@@ -43,6 +43,7 @@ Test-time adaptation (TTA) promises to personalize medical time series classifie
 ## 📖 Contents
 - [🧠 Method](#-method)
 - [🏆 Results](#-results)
+- [📎 Appendix](#-appendix)
 - [📊 Datasets](#-datasets)
 - [⛏️ Installation](#️-installation)
 - [⚡ Running experiments](#-running-experiments)
@@ -91,6 +92,95 @@ As reported in the paper:
 <img src="./docs/assets/fig4_contaminated_support.png" alt="Robustness to support contamination" width="100%"/>
 <em><b>Fig. 4.</b> Robustness to support contamination across six subject-labeled datasets. 0%, 25% or 50% of the support windows are replaced with windows from another subject of a different diagnostic class. Curves show mean macro-F1 across five backbone seeds and five support draws per seed.</em>
 </p>
+
+## 📎 Appendix
+
+Additional figures and tables from the paper's appendix. Full captions are in the images; see also the [project page](https://adinathdukre.github.io/LSTA/#appendix).
+
+<details open>
+<summary><b>Appendix figures</b> (click to collapse)</summary>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_fig05.png" alt="Figure 5. t-SNE of pre-classifier features on APAVA" width="100%"/>
+<br/><em><b>Figure 5.</b> t-SNE of pre-classifier features on APAVA</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_fig06.png" alt="Figure 6. Effect of the adaptation subspace rank" width="100%"/>
+<br/><em><b>Figure 6.</b> Effect of the adaptation subspace rank</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_fig07.png" alt="Figure 7. Effect of the number of unlabeled support windows" width="100%"/>
+<br/><em><b>Figure 7.</b> Effect of the number of unlabeled support windows</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_fig08.png" alt="Figure 8. Effect of the number of test-time adaptation steps" width="100%"/>
+<br/><em><b>Figure 8.</b> Effect of the number of test-time adaptation steps</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_fig09.png" alt="Figure 9. Sensitivity to the adaptation step size" width="100%"/>
+<br/><em><b>Figure 9.</b> Sensitivity to the adaptation step size</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_fig10.png" alt="Figure 10. Robustness to test-time signal corruption" width="100%"/>
+<br/><em><b>Figure 10.</b> Robustness to test-time signal corruption</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_fig11.png" alt="Figure 11. Distributions of LayerNorm updates" width="100%"/>
+<br/><em><b>Figure 11.</b> Distributions of LayerNorm updates</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_fig12.png" alt="Figure 12. t-SNE of representations for the frozen backbone and adaptation methods" width="80%"/>
+<br/><em><b>Figure 12.</b> t-SNE of representations for the frozen backbone and adaptation methods</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_fig13.png" alt="Figure 13. t-SNE of ADFTD pre-classifier features" width="100%"/>
+<br/><em><b>Figure 13.</b> t-SNE of ADFTD pre-classifier features</em>
+</p>
+
+</details>
+
+<details>
+<summary><b>Appendix tables</b> (click to expand)</summary>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_table03.png" alt="Table 3. Comparison with published classifiers on the five subject-labeled datasets" width="80%"/>
+<br/><em><b>Table 3.</b> Comparison with published classifiers on the five subject-labeled datasets</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_table04.png" alt="Table 4. Dataset summary" width="100%"/>
+<br/><em><b>Table 4.</b> Dataset summary</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_table05.png" alt="Table 5. Window-labeled datasets (MIT-BIH, Sleep-EDF) and HPP" width="100%"/>
+<br/><em><b>Table 5.</b> Window-labeled datasets (MIT-BIH, Sleep-EDF) and HPP</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_table06.png" alt="Table 6. F1 on HPP under support contamination" width="100%"/>
+<br/><em><b>Table 6.</b> F1 on HPP under support contamination</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_table07.png" alt="Table 7. Component ablation on HPP, MIT-BIH and Sleep-EDF" width="100%"/>
+<br/><em><b>Table 7.</b> Component ablation on HPP, MIT-BIH and Sleep-EDF</em>
+</p>
+
+<p align="center">
+<img src="./docs/assets/appendix/app_table08.png" alt="Table 8. Full comparison with TTA and source-free baselines" width="80%"/>
+<br/><em><b>Table 8.</b> Full comparison with TTA and source-free baselines</em>
+</p>
+
+</details>
 
 ## 📊 Datasets
 
