@@ -18,9 +18,9 @@ style="margin-bottom:-10px; display:block;" />
 
 <h3>📄 <a href="#-citation">Paper</a> &nbsp;|&nbsp; 🤗 <a href="https://huggingface.co/adidukrembzuai/LSTA">Checkpoints</a> &nbsp;|&nbsp; 🧠 <a href="#-method">Method</a> &nbsp;|&nbsp; ⚡ <a href="#-running-experiments">Run</a></h3>
 
-**[Adinath Dukre](https://github.com/adinathdukre)<sup>1,2*</sup>, Sandun Herath<sup>2*</sup>, Imran Razzak<sup>1,2</sup>**
+<b><a href="https://github.com/adinathdukre">Adinath Dukre</a><sup>1,2&#42;</sup>, Sandun Herath<sup>2&#42;</sup>, Imran Razzak<sup>1,2</sup></b>
 
-<sup>1</sup>Mohamed bin Zayed University of Artificial Intelligence, Abu Dhabi, UAE &nbsp;&nbsp; <sup>2</sup>Vitalverse &nbsp;&nbsp; <sup>*</sup>Equal contribution
+<sup>1</sup>Mohamed bin Zayed University of Artificial Intelligence, Abu Dhabi, UAE &nbsp;&nbsp; <sup>2</sup>Vitalverse &nbsp;&nbsp; <sup>&#42;</sup>Equal contribution
 
 <img src="https://raw.githubusercontent.com/genmilab/VGS-Decoding/main/docs/assets/genmilab-logo.png" alt="GenMI Lab" height="60"/>
 
